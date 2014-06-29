@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Titaniumifier &mdash; Sailing the cross-seas</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!-- … --><style>
+		body {
+			/* http://www.cartographersguild.com/regional-world-mapping/12012-%5Bwip%5D-pirate-world-2.html */
+			background-image: url('images/bg_light.jpg');
+			background-size: cover;
+			background-position: 50% 50%;
+		}
+
+		.reveal {
+			letter-spacing: 0.01em;
+			font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+
+		.reveal h1,
+		.reveal h2,
+		.reveal h3,
+		.reveal h4,
+		.reveal h5,
+		.reveal h6 {
+			font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			font-weight: 200;
+		}
+
+		.reveal h1 {
+			font-size: 3em;
+		}
+
+		.reveal .slides > section:not(.stack),
+		.reveal .slides .stack > section {
+			box-sizing: border-box;
+			padding: 1em;
+			background: rgba(255,255,255,0.6) padding-box;
+			border-radius: 0.3em;
+			border: 0.2em double rgba(50,0,0,0.8);
+		}
+
+		.reveal a:link,
+		.reveal a:visited,
+		.reveal .surprise strong {
+			color: #900;
+			text-shadow:
+				0.005em 0.01em 0px #fff0ee,
+				0.01em 0.02em 0px #fff0ee,
+				0.015em 0.03em 0px #fff0ee,
+				0.025em 0.05em 0px #033;
+		}
+
+		.reveal pre {
+			margin: 1em 0;
+		}
+
+		.reveal pre code {
+			padding: 5px 10px 10px;
+		}
+
+		.reveal li {
+			margin: 0.4em 0 0;
+		}
+
+		.reveal ul.compact li {
+			display: inline-block;
+			list-style: none;
+		}
+
+		.reveal ul.compact li:before {
+			content: '•';
+			font-size: 2em;
+			display: inline-block;
+			line-height: 0.3em;
+			margin-right: 0.2ex;
+		}
+
+		/* Compass rose Controls */
+
+		.reveal .controls {
+			/* http://www.polyvore.com/pirate_graphics_compass_rose_clip/thing?id=22230860 */
+			background-image: url('images/compass.png');
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+			background-size: cover;
+			bottom: 40px;
+			opacity: 1;
+			transition: opacity 300ms;
+		}
+
+		.initial .reveal .controls {
+			opacity: 0;
+		}
+
+		.reveal .controls div {
+			border-width: 6px;
+		}
+
+		/* UP */
+
+		.reveal .controls div.navigate-up {
+			left: 49px;
+			border-bottom-width: 30px;
+			top: 11px;
+		}
+
+		.reveal .controls div.navigate-up,
+		.reveal .controls div.navigate-up.enabled {
+			border-bottom-color: #320000;
+		}
+
+		/* RIGHT */
+
+		.reveal .controls div.navigate-right {
+			top: 49px;
+			border-left-width: 30px;
+			left: 63px;
+		}
+
+		.reveal .controls div.navigate-right,
+		.reveal .controls div.navigate-right.enabled {
+			border-left-color: #320000;
+		}
+
+		/* DOWN */
+
+		.reveal .controls div.navigate-down {
+			left: 49px;
+			border-top-width: 30px;
+			top: 63px;
+		}
+
+		.reveal .controls div.navigate-down,
+		.reveal .controls div.navigate-down.enabled {
+			border-top-color: #320000;
+		}
+
+		/* LEFT */
+
+		.reveal .controls div.navigate-left {
+			top: 49px;
+			border-right-width: 30px;
+			left: 11px;
+		}
+
+		.reveal .controls div.navigate-left,
+		.reveal .controls div.navigate-left.enabled {
+			border-right-color: #320000;
+		}
+
+		/* Ship track Progress */
+
+		.reveal .progress {
+			height: 10px;
+			bottom: 20px;
+			background: none;
+		}
+
+		.reveal .progress span {
+			background-image: url('images/dot.png');
+			background-position: 100% 50%;
+			background-size: 20px 10px;
+			background-repeat: repeat-x;
+			background-color: transparent;
+		}
+		</style><!-- … -->
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section data-state="initial" data-background="white">
+					<h1>Titaniumifier</h1>
+					<h3>Roaming in the cross-lands</h3>
+					<div style="margin:2em;font-size:0.8em">
+						<div>Pier Paolo Ramon</div>
+						<div>Senior front-end engineer at SMC</div>
+						<div>Twitter: <a href="http://twitter.com/_pier">@_pier</a></div>
+						<div>GitHub: <a href="https://github.com/yuchi">@yuchi</a></div>
+					</div>
+				</section>
+
+				<section class="surprise">
+					<h1>Titaniumif<strong>yarr!</strong></h1>
+					<h3><strong>Sailing</strong> in the cross-<strong>seas!</strong></h3>
+					<div style="margin:2em;font-size:0.8em">
+						<div><strong>Capt'n</strong> Pier Paolo Ramon</div>
+						<div><strong>Old</strong> front-end engin<strong>yerr</strong> at SMC</div>
+						<div>Twitter: <a href="http://twitter.com/_pier">@_pier</a></div>
+						<div>GitHub: <a href="https://github.com/yuchi">@yuchi</a></div>
+					</div>
+				</section>
+
+				<section>
+					<section data-markdown>
+						## Pirates!?
+
+						- don’t get me started on the Flying **Dutch**man and his capt’n Bernard **Fokke**
+						- Brendan Eich (a.k.a. `Visual Basic-in-the-browser` slayer) **loves** pirates
+						- who uses JavaScript **is** a pirate (not a ninja!)
+					</section>
+
+					<section data-markdown>
+						## Pirates!
+
+						1. They plundered every land or ship they encountered
+						2. They had small, fast ships
+						3. They used eyepatches
+					</section>
+
+					<section>
+						<h2>JavaScripters!</h2>
+						<p>1. We managed to get to:</p>
+						<ul class="compact">
+							<li>the browser</li>
+							<li>mobile apps</li>
+							<li>desktop apps</li>
+							<li>scripting</li>
+							<li>CLI tools</li>
+							<li>server-side</li>
+							<li>on the database</li>
+							<li>on hardware</li>
+							<li>on robots…</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>JavaScripters!</h2>
+						<p>2. We have small, fast modules!</p>
+						<img src="images/npm.png" alt="NPM Nice People Matter" style="padding:1em" />
+					</section>
+
+					<section>
+						<h2>JavaScripters</h2>
+						<p>3. well…</p>
+
+						<p><img src="images/Brendan-Eich-Pirate.jpg" alt="Brendan Eich as a Pirate, with an eyepatch" /></p>
+						<p><small>(that’s Brendan Eich)</small></p>
+					</section>
+				</section>
+
+				<section data-markdown>
+					Now that I’ve burnt 1 minute and half of my lightning talk…
+				</section>
+
+				<section data-markdown>
+					## Disambiguation
+					(but don’t take my word for granted)
+
+					- a **Titanium module** is a `.zip` file
+					- a **CommonJS module** is just a `.js` file that follows the spec (`module.exports`, `require()`…)
+					- a **CommonJS package** is a directory which has a `package.json`
+					- Node.js uses both the CommonJS spec, and add its own peculiarity
+				</section>
+
+				<section>
+					<section data-markdown>
+						## Situation
+
+						- we have `gittio` to manage Titanium modules (thanks Fokke!) and that’s ok for native ones
+						- there’s no way to define dependencies (as in “module A requires module B”)
+						- we can build native modules and CommonJS modules
+					</section>
+
+					<section data-markdown>
+						## Titanium CommonJS modules
+						as `zip` modules, installable through Studio
+
+						- no documentation
+						- no build tool (no `ant`, `*.py`s or something)
+						- you **can** `require` other modules, but no `dependencies`
+						- you **cannot** `require` your own files!
+						- just **one** single file
+					</section>
+
+					<section data-markdown>
+						## Prior art
+
+						- `tetanize` and `tipi` (30 Sep) https://github.com/IsCoolEntertainment/tetanize
+						- `ti-mocha` (20 Dec, just related) https://github.com/tonylukasavage/ti-mocha
+						- `npmifier` (10 Jan) not published
+						- `titaniumifier` (31 Jan) https://github.com/smclab/titaniumifier
+						- `ti-commonsj` (20 Mar) https://github.com/tonylukasavage/ti-commonjs
+					</section>
+
+					<section>
+						<h2>Scenarios</h2>
+
+						<ol>
+							<li class="fragment highlight-red">using plain JS packages published on npm</li>
+							<li>using actual Node.js packages</li>
+							<li class="fragment highlight-red">writing cross-env packages</li>
+							<li class="fragment highlight-red">writing Titanium CommonJS modules as packages</li>
+							<li>publish Titanium modules on npm</li>
+						</ol>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						## Ti.Next
+
+						- the module distribution strategy/repository/toolchain is yet to be defined
+						- it will support Node.js-style requires (Yarrrrrr!)
+						- will it support Node.js’ builtins?
+					</section>
+
+					<section>
+						<img src="images/whoarewe.png">
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						# Titaniumifier
+
+						turns a Node.js package into a Titanium module
+
+						https://github.com/smclab/titaniumifier
+					</section>
+
+					<section data-markdown>
+						## Challenges
+
+						- change `require` semantics
+						- shim globals (`process`…)
+						- shim builtins (`util`, `fs`…)
+					</section>
+
+					<section data-markdown>
+						## How to get there
+
+						- extract `package.json` metadata into a `manifest`
+						- compact your dependencies and modules into a single JS file
+						- build a ‘module’, which is just a `.zip`
+					</section>
+
+					<section data-markdown>
+						## How we got there
+
+						- `browserify` is doing the hard work
+						- [`node-titanium-resolve`][ntr] extends the standard resolution algorithm
+						- `package.json` plus **`guid`** and **`engines.titamiumsdk`**
+
+						[ntr]: https://github.com/smclab/node-titanium-resolve
+					</section>
+
+					<section data-markdown>
+						### `grunt-titaniumfier`
+						## Grunt plugin for Titaniumifier
+
+						```javascript
+						grunt.initConfig({
+							pkg: grunt.file.readJSON('package.json'),
+							titaniumifier: {
+								'mymodule': { options: {} }
+							}
+						});
+						```
+
+						```bash
+						grunt titaniumifier:mymodule
+						```
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						### `ti-superagent`
+						## Titanium.Network.HTTPClient with less suck!
+						https://github.com/smclab/ti-superagent
+
+						```javascript
+						require('superagent')
+						.get('http://my-awesome-server.it/api.txt')
+						.end(function (err, res) {
+							console.log(res.body);
+						});
+						```
+					</section>
+
+					<section data-markdown>
+						it’s our reference project for the following scenario:
+
+						> **Wrapping** a Node package for Titanium
+					</section>
+
+					<section data-markdown>
+						## Steal from this code!
+						https://github.com/smclab/ti-superagent
+
+						**Renaming your module** (you shouldn’t)
+
+						```javascript
+						{ options: { as: "another-name" } }
+						```
+
+						**Defining `minsdk`** (mandatory!)
+						```javascript
+						{ engines: { titaniumsdk: ">= 3.2.0.GA" } }
+						```
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						### `liferay-connector`
+						## Connector for Liferay Portal’s JSON WS
+						https://github.com/smclab/liferay-connector
+
+						```javascript
+						require('liferay-connector')
+						.authenticate(HOST, { login: LOGIN, password: PWD })
+						.then(function () {
+							console.log("I’m in!")
+						});
+						```
+					</section>
+
+					<section data-markdown>
+						it’s our reference project for the following scenario:
+
+						> **Writing** a cross-env package
+					</section>
+
+					<section data-markdown>
+						## Steal from this code!
+						https://github.com/smclab/liferay-connector
+
+						you couldn’t tell from the source, but it uses
+
+						- `superagent` on Node (and the browser!)
+						- `ti-superagent` on Titanium
+
+						```javascript
+						{
+							// ... (other package.json lines here)
+							"titanium": {
+								"superagent": "ti-superagent"
+							}
+						}
+						```
+					</section>
+
+					<section data-markdown>
+						## Steal from this code!
+						https://github.com/smclab/liferay-connector
+
+						uses Promises internally!
+
+						(and exports its implementation of choice to you to reuse)
+
+						```
+						var Promise = require('bluebird');
+						var liferay = module.exports;
+						liferay.Promise = Promise;
+						```
+					</section>
+
+					<section data-markdown>
+						## Steal from this code!
+						https://github.com/smclab/liferay-connector
+
+						Cross-env tests!!
+
+						- uses `grunt-titanium`
+						- uses `ti-mocha`
+						- uses `should`
+
+						```bash
+						grunt node ios droid # pure gold
+						```
+					</section>
+				</section>
+
+				<section>
+					<img src="images/smc.png" style="width:10em;padding:1em;">
+
+					<p>Appcelerator Master Partners in Italy</p>
+					<p><a href="http://www.smc.it">www.smc.it</a>
+					<p>Twitter: <a href="https://twitter.com/SMCPartner">@SMCPartner</a></p>
+					<p>GitHub: <a href="https://github.com/smclab">@smclab</a></p>
+				</section>
+
+				<section class="surprise">
+					<img src="images/smc_pirate.png" style="width:10em;padding:1em;">
+
+					<p>Appcelerator Master <strong>Crew members</strong> in Italy</p>
+					<p><a href="http://www.smc.it">www.smc.it</a>
+					<p>Twitter: <a href="https://twitter.com/SMCPartner">@SMCPartner</a></p>
+					<p>GitHub: <a href="https://github.com/smclab">@smclab</a></p>
+				</section>
+
+				<section>
+					<h1>Thank you!</h1>
+					<hr>
+					<p>Pier Paolo Ramon</p>
+					<p>Senior front-end engineer</p>
+					<p>Twitter: <a href="https://twitter.com/_pier">@_pier</a></p>
+					<p>GitHub: <a href="https://github.com/yuchi">@yuchi</a></p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			document.addEventListener('click', function (event) {
+				if (event.button === 1) Reveal.next();
+			});
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				parallaxBackgroundImage: 'images/bg_light.jpg',
+				parallaxBackgroundSize: '3000px 1500px',
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
